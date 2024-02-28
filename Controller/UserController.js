@@ -46,11 +46,18 @@ export const Login = catchAsyncError(async (req,res,next)=>{
  if(!isMatch) return next(new ErrorHandler("Incorrect Email and Password",401))
 
  sendToken(res,user,`Welcom back ${user.name}`,201)
+ res.json({
+    message:"working"
+ })
  })
 
  export const Logout = catchAsyncError(async (req,res,next)=>{
     res.status(200).cookie("token",null,{
         expires:new Date(Date.now()),
+        httpOnly:true,
+        
+        secure:true,
+        sameSite:"none"
     }).json({
         message:"Logged Out Succesfully",
         success:true
@@ -58,7 +65,7 @@ export const Login = catchAsyncError(async (req,res,next)=>{
  })
 
  export const getMyProfile= catchAsyncError(async(req,res,next)=>{
-    console.log(req.user._id)
+ 
     const user = await User.findById(req.user._id)
     res.status(200).json({
         success:true,
@@ -263,6 +270,6 @@ User.watch().on('change',async()=>{
     const subscription  = await User.find({"subscription.status":"active"})
     stats[0].users = await User.countDocuments()
     stats[0].subscription = subscription.length
-    stats[0].createdAt = new Date.now(Date.now())
+    stats[0].createdAt = new Date(Date.now());
   await stats[0].save()  
 })
