@@ -14,12 +14,11 @@ import { Stats } from "../Model/Stats.js";
 export const Register = catchAsyncError(async (req,res,next)=>{
    const {name,email,password} = req.body
    const file = req.file
-
    if(!name||!email||!password || !file) return next(new ErrorHandler("Please enter all field",400))
    let user = await User.findOne({email})
 if(user) return next(new ErrorHandler('User Already Exist',409)) 
 const fileUri = getDataUri(file)
-
+console.log(fileUri.content)
 const mycloud = await cloudinary.v2.uploader.upload(fileUri.content)
 
 user = await User.create({
