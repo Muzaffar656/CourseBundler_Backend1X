@@ -83,3 +83,5 @@ schema.methods.getResetToken = async function(){
     return resetToken
 }
 export const User = mongoose.model("User",schema)
+
+// done 
