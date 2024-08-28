@@ -13,7 +13,7 @@ export  const getAllCourses = catchAsyncError( async(req,res,next)=>{
     const keyword = req.query.keyword || ""
     const category = req.query.category || ""
 
-
+    // categories whise
     const course = await Course.find({
         title:{
             $regex:keyword ,
@@ -31,9 +31,10 @@ export  const getAllCourses = catchAsyncError( async(req,res,next)=>{
     })
 })
 
-export  const createCourse = catchAsyncError( async(req,res,next)=>{
+export  const  createCourse = catchAsyncError( async(req,res,next)=>{
    
    const {title,description,category,createdBy} = req.body
+
     if(!title || !description || !category || !createdBy) return next(new ErrorHandler('Please add all fields',400))
 
     const file = req.file;

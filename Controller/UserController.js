@@ -18,7 +18,7 @@ export const Register = catchAsyncError(async (req,res,next)=>{
    let user = await User.findOne({email})
 if(user) return next(new ErrorHandler('User Already Exist',409)) 
 const fileUri = getDataUri(file)
-console.log(fileUri.content)
+
 const mycloud = await cloudinary.v2.uploader.upload(fileUri.content)
 
 user = await User.create({
@@ -35,7 +35,7 @@ sendToken(res,user,"Registerd Succesfully",201)
 
 export const Login = catchAsyncError(async (req,res,next)=>{
     const {email,password} = req.body
- 
+
     if(!email||!password) return next(new ErrorHandler("Please enter all field",400))
     const  user = await User.findOne({email}).select("+password")
  if(!user) return next(new ErrorHandler('Incorrect Email and Password',401)) 

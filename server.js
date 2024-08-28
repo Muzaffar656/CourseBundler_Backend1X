@@ -12,7 +12,7 @@ connectDB()
 
 // cloudinary difine
 cloudinary.config({ 
-  cloud_name: process.env.CLOUD_NAME, 
+  cloud_name: process.env.CLOUD_NAME,
   api_key:process.env.CLOUD_API_KEY , 
   api_secret:process.env.CLOUD_SECRET_KEY 
 });
@@ -22,6 +22,7 @@ export const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret:process.env.RAZORPAY_API_SECRET,
 });
+
 
 
 //Node coren for create a object
