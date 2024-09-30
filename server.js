@@ -4,6 +4,7 @@ import {v2 as cloudinary} from 'cloudinary';
 import Razorpay from 'razorpay'
 import nodeCron from  'node-cron'
 import { Stats } from "./Model/Stats.js";
+import Stripe from "stripe";
 
 
 // call database
@@ -24,6 +25,8 @@ export const instance = new Razorpay({
 });
 
 
+// Stripe integration
+Stripe(process.env.STRIPE_API_SECRET)
 
 //Node coren for create a object
 nodeCron.schedule("0 0 0 1 * *",async()=>{
@@ -35,6 +38,7 @@ nodeCron.schedule("0 0 0 1 * *",async()=>{
  }
 
 })
+
 
 
 

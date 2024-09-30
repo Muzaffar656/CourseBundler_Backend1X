@@ -26,8 +26,9 @@ const schema = new mongoose.Schema({
         enum:["admin", "user"],
     },
     subscription:{
-        id:String,
-        status:String
+        session_id:String,
+        status:String,
+        id:String
     },
     avatar:{
         public_id:{

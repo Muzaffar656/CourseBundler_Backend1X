@@ -45,6 +45,7 @@ export const getDashboardStats = catchAsyncError(async (req,res,next)=>{
         
     }
     const requiredSize = 12 - stats.length
+   
 
     for (let i = 0; i < requiredSize; i++) {
       statsData.unshift({
@@ -55,6 +56,7 @@ export const getDashboardStats = catchAsyncError(async (req,res,next)=>{
     }
 
     const userCount = statsData[11].users
+    
     const subscriptionCount = statsData[11].subscription
     const viewCount = statsData[11].views
 
