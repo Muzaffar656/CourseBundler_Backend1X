@@ -85,6 +85,7 @@ export const addLecture = catchAsyncError(async(req,res,next)=>{
     if(!course) return next(new ErrorHandler("Course not found",404))
 
     const file = req.file
+    console.log(file)
     const fileUri = getDataUri(file)
     const mycloud = await cloudinary.v2.uploader.upload(fileUri.content,{
         resource_type:"video"
@@ -166,7 +167,6 @@ res.status(200).json({
 Course.watch().on('change',async()=>{
     const stats = await Stats.find({}).sort({createdAt:"desc"}).limit(1)
     const course = await Course.find({})
-
    let totalView = 0
 
     for (let i = 0; i < course.length; i++) {
